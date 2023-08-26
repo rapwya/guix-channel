@@ -24,15 +24,4 @@
 
   ;; Below is the list of Home services.  To search for available
   ;; services, run 'guix home search KEYWORD' in a terminal.
-  (services
-   (list (service home-zsh-service-type
-                  (home-zsh-configuration
-                   (zshenv (list (local-file 
-                                  "/home/warthael/.zshenv"
-                                  "zshenv")))
-                   (zprofile (list (local-file 
-                                    "/home/warthael/.config/zsh/.zprofile"
-                                    "zprofile")))
-                   (zshrc (list (local-file 
-                                 "/home/warthael/.config/zsh/.zshrc"
-                                 "zshrc"))))))))
+    )
