@@ -8,7 +8,8 @@
              (gnu packages)
              (gnu services)
              (guix gexp)
-             (gnu home services shells))
+             (gnu home services shells)
+             (rapwya home-services emacs))
 
 (home-environment
   ;; Below is the list of packages that will show up in your
@@ -16,12 +17,13 @@
   (packages (specifications->packages (list "git"
                                             "openssh"
                                             "ungoogled-chromium"
-                                            "icecat"
                                             "font-jetbrains-mono"
                                             "font-awesome"
-                                            "alacritty"
-                                            "zsh")))
+                                            "ripgrep"
+                                            "exa"
+                                            "alacritty")))
 
   ;; Below is the list of Home services.  To search for available
   ;; services, run 'guix home search KEYWORD' in a terminal.
-    )
+  (services 
+    (list (service home-emacs-config-service))))

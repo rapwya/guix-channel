@@ -17,8 +17,16 @@
 (use-service-modules cups desktop networking ssh xorg)
 
 (operating-system
-  (initrd microcode-initrd)
+  (kernel linus)
+  ;; Apply Microcode Patches for Intel CPUs
+  (initrd (lambda (file-systems . rest)
+          (apply microcode-initrd file-systems
+                 #:initrd base-initrd
+                 #:microcode-packages (list intel-microcode)
+                 rest)))
+  ;; Just use firmware for Intel machines
   (firmware (cons* iwlwifi-firmware 
+                   ibt-hw-firmware
                    %base-firmware))
   (locale "en_US.utf8")
   (timezone "America/Los_Angeles")
@@ -38,11 +46,13 @@
   ;; Packages installed system-wide.  Users can also install packages
   ;; under their own account: use 'guix search KEYWORD' to search
   ;; for packages and 'guix install PACKAGE' to install a package.
-  (packages (append (list (specification->package "emacs")
-                          (specification->package "emacs-exwm")
-                          (specification->package
-                           "emacs-desktop-environment")
-                          (specification->package "nss-certs"))
+  (packages (append (map specification->package
+                         '("git"
+                           "stow"
+                           "neovim"
+                           "emacs"
+                           "sway"
+                           "nss-certs"))
                     %base-packages))
 
   ;; Below is the list of system services.  To search for available
