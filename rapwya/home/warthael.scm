@@ -4,26 +4,30 @@
 ;; need to capture the channels being used, as returned by "guix describe".
 ;; See the "Replicating Guix" section in the manual.
 
-(use-modules (gnu home)
-             (gnu packages)
-             (gnu services)
-             (guix gexp)
-             (gnu home services shells)
-             (rapwya home-services emacs))
+(define-module (rapwya home warthael)
+  #:use-module (gnu home)
+  #:use-module (gnu packages)
+  #:use-module (gnu services)
+  #:use-module (guix gexp)
+  #:use-module (gnu home services shells)
+  #:use-module (rapwya services emacs))
 
-(home-environment
-  ;; Below is the list of packages that will show up in your
-  ;; Home profile, under ~/.guix-home/profile.
-  (packages (specifications->packages (list "git"
-                                            "openssh"
-                                            "ungoogled-chromium"
-                                            "font-jetbrains-mono"
-                                            "font-awesome"
-                                            "ripgrep"
-                                            "exa"
-                                            "alacritty")))
+(define warthael-home
+  (home-environment
+    ;; Below is the list of packages that will show up in your
+    ;; Home profile, under ~/.guix-home/profile.
+    (packages (specifications->packages (list "git"
+                                              "openssh"
+                                              "ungoogled-chromium"
+                                              "font-jetbrains-mono"
+                                              "font-awesome"
+                                              "ripgrep"
+                                              "exa"
+                                              "alacritty")))
 
-  ;; Below is the list of Home services.  To search for available
-  ;; services, run 'guix home search KEYWORD' in a terminal.
-  (services 
-    (list (service home-emacs-config-service))))
+    ;; Below is the list of Home services.  To search for available
+    ;; services, run 'guix home search KEYWORD' in a terminal.
+    (services 
+      (list (service home-emacs-config-service-type)))))
+
+warthael-home
