@@ -19,6 +19,7 @@
          ;; evil mode
          "emacs-evil"
          "emacs-evil-collection"
+         "emacs-evil-nerd-commenter"
          "emacs-undo-tree"
 
          ;; theming
@@ -27,21 +28,39 @@
          "emacs-doom-modeline"
          "emacs-minions"
 
+         "emacs-smartparens"
+         "emacs-rainbow-delimiters"
+         "emacs-rainbow-mode"
+
          ;; org mode
          "emacs-org"
          "emacs-org-roam"
 
-         ;; completions
+         ;; Utility packages for things like completions
          "emacs-corfu"
          "emacs-marginalia"
          "emacs-vertico"
          "emacs-marginalia"
          "emacs-orderless"
+         "emacs-consult"
+         "emacs-embark"
+
+         ;; Move between the screen and windows easily
+         "emacs-avy"
+         "emacs-ace-window"
+
+         ;; buffer isolated workspaces
+         "emacs-tabspaces"
+
+         ;; save all buffers
+         "emacs-super-save"
 
          ;; help to keep ~/.config/emacs clean
          "emacs-no-littering"
 
-         ;; guix
+         ;; makes the help menu better
+         "emacs-helpful"
+
          "emacs-guix")))
 
 (define home-emacs-config-service-type
