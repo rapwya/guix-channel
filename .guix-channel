@@ -2,7 +2,7 @@
   (version 0)
   (dependencies 
     (channel 
-      (name 'guix)
+      (name guix)
       (url "https://git.savannah.gnu.org/git/guix.git")
       (introduction
         (channel-introduction
@@ -10,7 +10,7 @@
           (commit "74d72046bdc1ed6c859565570d0db58d20c9ddd7")
           (signer "BBB0 2DDF 2CEA F6A8 0D1D  E643 A2A0 6DF2 A33A 54FA"))))
     (channel 
-      (name 'nonguix)
+      (name nonguix)
       (url "https://git.savannah.gnu.org/git/guix.git")
       (introduction
         (channel-introduction
