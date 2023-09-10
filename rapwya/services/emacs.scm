@@ -78,4 +78,4 @@
                             ("emacs/modules/rw-theming.el", (local-file "../files/emacs/modules/rw-theming.el"))
                             ("emacs/modules/rw-dev.el", (local-file "../files/emacs/modules/rw-dev.el"))
                             ("emacs/modules/rw-keys-evil.el", (local-file "../files/emacs/modules/rw-keys-evil.el"))))) 
-                (default-value #f)))
+                (default-value #f))))
