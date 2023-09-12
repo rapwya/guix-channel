@@ -50,7 +50,7 @@
          "emacs-ace-window"
 
          ;; buffer isolated workspaces
-         ;;"emacs-tabspaces"
+         "emacs-tabspaces"
 
          ;; save all buffers
          "emacs-super-save"
@@ -73,16 +73,16 @@
               home-emacs-config-profile-service) 
             (service-extension 
               home-xdg-configuration-files-service-type 
-              (list `(("emacs/init.el"
-                       ,(local-file "../files/emacs/init.el"))
-                      ("emacs/modules/rw-core.el"
-                       ,(local-file "../files/emacs/modules/rw-core.el"))
-                      ("emacs/modules/rw-completion.el"
-                       ,(local-file "../files/emacs/modules/rw-completion.el"))
-                      ("emacs/modules/rw-theming.el" 
-                       ,(local-file "../files/emacs/modules/rw-theming.el"))
-                      ("emacs/modules/rw-dev.el"
-                       ,(local-file "../files/emacs/modules/rw-dev.el"))
-                      ("emacs/modules/rw-keys-evil.el"
-                       ,(local-file "../files/emacs/modules/rw-keys-evil.el")))))))
+              `(("emacs/init.el" 
+                 ,(local-file "../files/emacs/init.el"))
+                ("emacs/modules/rw-core.el" 
+                 ,(local-file "../files/emacs/modules/rw-core.el")) 
+                ("emacs/modules/rw-completion.el" 
+                 ,(local-file "../files/emacs/modules/rw-completion.el"))
+                ("emacs/modules/rw-theming.el"
+                 ,(local-file "../files/emacs/modules/rw-theming.el")) 
+                ("emacs/modules/rw-dev.el"
+                 ,(local-file "../files/emacs/modules/rw-dev.el"))
+                ("emacs/modules/rw-keys-evil.el" 
+                 ,(local-file "../files/emacs/modules/rw-keys-evil.el"))))))
     (default-value #f)))
