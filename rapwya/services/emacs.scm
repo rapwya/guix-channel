@@ -50,7 +50,7 @@
          "emacs-ace-window"
 
          ;; buffer isolated workspaces
-         "emacs-tabspaces"
+         ;;"emacs-tabspaces"
 
          ;; save all buffers
          "emacs-super-save"
