@@ -12,7 +12,7 @@
  completions-detailed t)
 
 ;; Add configuration modules to load path
-(add-to-list 'load-path '"/home/.config/emacs/modules")
+(add-to-list 'load-path '"/home/warthael/.config/emacs/modules")
 
 ;; no need to make backups
 (setq
