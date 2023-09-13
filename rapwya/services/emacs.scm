@@ -10,7 +10,7 @@
 
   #:export (home-emacs-config-service-type))
 
-(define (home-emacs-config-profile-service config)
+(define (get-emacs-packages config)
   (map specification->package
        (list 
          ;; git support
@@ -63,6 +63,14 @@
 
          "emacs-guix")))
 
+(define (get-emacs-config-files config)
+  `(("emacs/init.el" ,(local-file "../files/emacs/init.el")) 
+    ("emacs/modules/rw-core.el" ,(local-file "../files/emacs/modules/rw-core.el"))
+    ("emacs/modules/rw-completion.el" ,(local-file "../files/emacs/modules/rw-completion.el"))
+    ("emacs/modules/rw-theming.el" ,(local-file "../files/emacs/modules/rw-theming.el"))
+    ("emacs/modules/rw-dev.el" ,(local-file "../files/emacs/modules/rw-dev.el")) 
+    ("emacs/modules/rw-keys-evil.el" ,(local-file "../files/emacs/modules/rw-keys-evil.el"))))
+
 (define home-emacs-config-service-type
   (service-type 
     (name 'home-emacs-config)
@@ -70,19 +78,8 @@
     (extensions
       (list (service-extension
               home-profile-service-type 
-              home-emacs-config-profile-service) 
+              get-emacs-packages) 
             (service-extension 
               home-xdg-configuration-files-service-type 
-              `(("emacs/init.el" 
-                 ,(computed-file "../files/emacs/init.el"))
-                ("emacs/modules/rw-core.el" 
-                 ,(computed-file "../files/emacs/modules/rw-core.el")) 
-                ("emacs/modules/rw-completion.el" 
-                 ,(computed-file "../files/emacs/modules/rw-completion.el"))
-                ("emacs/modules/rw-theming.el"
-                 ,(computed-file "../files/emacs/modules/rw-theming.el")) 
-                ("emacs/modules/rw-dev.el"
-                 ,(computed-file "../files/emacs/modules/rw-dev.el"))
-                ("emacs/modules/rw-keys-evil.el" 
-                 ,(computed-file "../files/emacs/modules/rw-keys-evil.el"))))))
+              get-emacs-config-files)))
     (default-value #f)))
