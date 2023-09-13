@@ -1,6 +1,9 @@
 (define-module (rapwya packages emacs-xyz)
   #:use-module (guix git-download)
-  #:use-module (guix build-system emacs))
+  #:use-module (guix build-system emacs)
+  #:use-module (guix packages)
+
+  #:use-module (gnu packages emacs-xyz))
 
 (define-public emacs-tabspaces
   (package
