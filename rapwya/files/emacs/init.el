@@ -4,7 +4,6 @@
  ;; set the GC from the default 8kb to 100mb
  gc-cons-threshold (* 50 1000 1000)
 
-
  ;; no bell
  ring-bell-function nil
 
@@ -20,6 +19,7 @@
  auto-save-default nil
  create-lockfiles nil)
 
+(require 'use-package)
 (require 'rw-core)
 (require 'rw-dev)
 (require 'rw-keys-evil)

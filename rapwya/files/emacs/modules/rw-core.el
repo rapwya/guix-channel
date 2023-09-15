@@ -47,12 +47,6 @@
 ;; Basic Emacs Settings ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; don't remind what scratch buffer is
-(setq initial-scratch-messag nil)
-
-;; No start message
-(setq inhibit-startup-message t)
-
 ;; ensure we're using UTF-8
 (set-charset-priority 'unicode)
 (set-default-coding-systems 'utf-8)
