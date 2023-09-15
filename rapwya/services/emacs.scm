@@ -64,7 +64,8 @@
          "emacs-guix")))
 
 (define (get-emacs-config-files config)
-  `(("emacs/init.el" ,(local-file "../files/emacs/init.el")) 
+  `(("emacs/early-init.el" ,(local-file "../files/emacs/early-init.el"))
+    ("emacs/init.el" ,(local-file "../files/emacs/init.el")) 
     ("emacs/modules/rw-core.el" ,(local-file "../files/emacs/modules/rw-core.el"))
     ("emacs/modules/rw-completion.el" ,(local-file "../files/emacs/modules/rw-completion.el"))
     ("emacs/modules/rw-theming.el" ,(local-file "../files/emacs/modules/rw-theming.el"))
