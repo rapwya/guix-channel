@@ -62,8 +62,6 @@
     (packages (append (map specification->package
                            '("git"
                              "stow"
-                             "neovim"
-                             "emacs"
                              "sway"
                              "nss-certs"))
                       %base-packages))

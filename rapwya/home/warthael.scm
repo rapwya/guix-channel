@@ -16,14 +16,18 @@
   (home-environment
     ;; Below is the list of packages that will show up in your
     ;; Home profile, under ~/.guix-home/profile.
-    (packages (specifications->packages (list "git"
-                                              "openssh"
-                                              "ungoogled-chromium"
-                                              "font-jetbrains-mono"
-                                              "font-awesome"
-                                              "ripgrep"
-                                              "exa"
-                                              "alacritty")))
+
+    (packages (specifications->packages 
+                (list "git" 
+                      "openssh" 
+                      "ungoogled-chromium" 
+                      "font-jetbrains-mono" 
+                      "font-awesome" 
+                      "ripgrep" 
+                      "exa" 
+                      "neovim" 
+                      "emacs-next" 
+                      "alacritty")))
 
     ;; Below is the list of Home services.  To search for available
     ;; services, run 'guix home search KEYWORD' in a terminal.
