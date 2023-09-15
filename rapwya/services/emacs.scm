@@ -43,8 +43,9 @@
          "emacs-vertico"
          "emacs-marginalia"
          "emacs-orderless"
-         "emacs-consult"
          "emacs-embark"
+         "emacs-consult"
+         "emacs-consult-notes"
 
          ;; Move between the screen and windows easily
          "emacs-avy"
