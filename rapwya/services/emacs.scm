@@ -25,7 +25,7 @@
          ;; theming
          "emacs-doom-themes"
          "emacs-kind-icon"
-         "emacs-mode-line"
+         "emacs-mood-line"
          "emacs-minions"
 
          "emacs-smartparens"
