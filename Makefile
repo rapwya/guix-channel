@@ -6,7 +6,7 @@ gc:
 gpull:
 	guix pull --channels=/home/warthael/guix-channel/rapwya/channels.scm
 
-gystem:
+gsystem:
 	sudo guix system reconfigure /home/warthael/guix-channel/rapwya/systems/tyfing.scm
 
 warthael:
