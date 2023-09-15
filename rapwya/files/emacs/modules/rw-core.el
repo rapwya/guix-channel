@@ -158,6 +158,6 @@
 (add-to-list 'auto-mode-alist '("\\.info\\'" . Info-on-current-buffer))
 
 ;; Start server
-(server start)
+(server-start)
 
 (provide 'rw-core)
