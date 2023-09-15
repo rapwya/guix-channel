@@ -33,3 +33,21 @@
     https://github.com/minad/consult#multiple-sources -
     https://github.com/florommel/bufferlo")
     (license #f)))
+
+(define-public emacs-consult-notes
+  (package
+    ((name "emacs-consult-notes")
+     (version "20230706.2018")
+     (source (origin
+               (method git-fetch)
+               (uri (git-reference
+                     (url "https://github.com/mclear-tools/consult-notes.git")
+                     (commit "006b20977cc27aec4b5aca14c13824f5df0ab8cc")))
+               (sha256 (base32
+                        "0n40cvqc36dhxcvrk6ckhvxiz2llzn6l0lwwphpkj7bygsf1d1km"))))
+     (build-system emacs-build-system)
+     (propagated-inputs (list emacs-consult emacs-s emacs-dash))
+     (home-page "https://github.com/mclear-tools/consult-notes")
+     (synopsis "Manage notes with consult")
+     (description "Manage your notes with consult.")
+     (license #f))))

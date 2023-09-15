@@ -35,6 +35,7 @@
          ;; org mode
          "emacs-org"
          "emacs-org-roam"
+         "emacs-org-modern"
 
          ;; Utility packages for things like completions
          "emacs-corfu"
@@ -61,6 +62,7 @@
          ;; makes the help menu better
          "emacs-helpful"
 
+         "emacs-use-package"
          "emacs-guix")))
 
 (define (get-emacs-config-files config)
@@ -70,7 +72,8 @@
     ("emacs/modules/rw-completion.el" ,(local-file "../files/emacs/modules/rw-completion.el"))
     ("emacs/modules/rw-theming.el" ,(local-file "../files/emacs/modules/rw-theming.el"))
     ("emacs/modules/rw-dev.el" ,(local-file "../files/emacs/modules/rw-dev.el")) 
-    ("emacs/modules/rw-keys-evil.el" ,(local-file "../files/emacs/modules/rw-keys-evil.el"))))
+    ("emacs/modules/rw-keys-evil.el" ,(local-file "../files/emacs/modules/rw-keys-evil.el"))
+    ("emacs/modules/rw-org.el" ,(local-file "../files/emacs/modules/rw-org.el"))))
 
 (define home-emacs-config-service-type
   (service-type 

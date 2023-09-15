@@ -25,3 +25,4 @@
 (require 'rw-keys-evil)
 (require 'rw-completion)
 (require 'rw-theming)
+(require 'rw-org)
