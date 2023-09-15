@@ -11,7 +11,8 @@
  completions-detailed t)
 
 ;; Add configuration modules to load path
-(add-to-list 'load-path '"/home/warthael/.config/emacs/modules")
+(add-to-list 'load-path '"~/.config/emacs/modules")
+(add-to-list 'load-path '"~/.guix-profile/profile/share/emacs/site-lisp")
 
 ;; no need to make backups
 (setq
