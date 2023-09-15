@@ -52,10 +52,6 @@
       :if-new (file+head+olp ,rw/daily-note-filename
                              ,rw/daily-note-header
                              ("Journal")))))
-  :config
-  (setq rw/daily-note-filename "%<%Y-%m-%d>.org" 
-        rw/daily-note-header "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
-
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n g" . org-roam-graph)
@@ -63,6 +59,9 @@
          ("C-c n c" . org-roam-capture)
          ;; Dailies
          ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  (setq rw/daily-note-filename "%<%Y-%m-%d>.org" 
+        rw/daily-note-header "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
 
   (org-roam-db-autosync-mode))
 
