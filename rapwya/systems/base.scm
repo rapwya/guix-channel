@@ -62,12 +62,7 @@
     (packages (append (map specification->package
                            '("git"
                              "stow"
-                             "nss-certs"
-                             ;; Tiling Manager
-                             "sway"
-                             "waybar"
-                             "swaylock"
-                             "fuzzel"))
+                             "nss-certs"))
                       %base-packages))
 
     ;; Below is the list of system services.
@@ -76,11 +71,30 @@
       (append (list (service xfce-desktop-service-type)
                     (service cups-service-type)
                     (set-xorg-configuration
-                      (xorg-configuration (keyboard-layout keyboard-layout))))
+                      (xorg-configuration (keyboard-layout keyboard-layout)))
 
-              ;; This is the default list of services we are appending to.
+                   ;; Configure swaylock as a setuid program 
+                   (service screen-locker-service-type 
+                            (screen-locker-configuration 
+                              (name "swaylock") 
+                              (program (file-append swaylock "/bin/swaylock")) 
+                              (using-pam? #t) 
+                              (using-setuid? #f)))
+
+                   ;; Configure the Guix service and ensure we use Nonguix substitutes
+                   (simple-service 'add-nonguix-substitutes 
+                                   guix-service-type 
+                                   (guix-extension 
+                                     (substitute-urls 
+                                       (append (list "https://substitutes.nonguix.org") 
+                                               %default-substitute-urls)) 
+                                     (authorized-keys 
+                                       (append (list (plain-file "nonguix.pub"
+                                                                 "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
+                                         %default-authorized-guix-keys))))) 
               %desktop-services))
 
+    ;; todo: reboot this to be on efi one day, not sure what went wrong the first time...
     (bootloader (bootloader-configuration 
                   (bootloader grub-bootloader)
                   (targets (list "/dev/sda"))
