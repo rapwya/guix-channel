@@ -62,8 +62,12 @@
     (packages (append (map specification->package
                            '("git"
                              "stow"
+                             "nss-certs"
+                             ;; Tiling Manager
                              "sway"
-                             "nss-certs"))
+                             "waybar"
+                             "swaylock"
+                             "fuzzel"))
                       %base-packages))
 
     ;; Below is the list of system services.
