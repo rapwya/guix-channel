@@ -18,4 +18,5 @@
   (setq mood-line-glyph-alist mood-line-glyphs-fira-code)
   (mood-line-mode))
 
+;; End
 (provide 'rw-theming)

@@ -63,6 +63,14 @@
          ;; makes the help menu better
          "emacs-helpful"
 
+         ;; programming languages
+         "emacs-flycheck"
+
+         ;; -- lisps
+         "geiser"
+         "emacs-geiser"
+         "emacs-geiser-guile"
+
          "emacs-use-package"
          "emacs-guix")))
 
