@@ -67,7 +67,6 @@
          "emacs-flycheck"
 
          ;; -- lisps
-         "geiser"
          "emacs-geiser"
          "emacs-geiser-guile"
 
