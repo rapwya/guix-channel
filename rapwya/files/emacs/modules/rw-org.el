@@ -26,7 +26,6 @@
   :hook (org-mode . org-modern-mode))
 
 (use-package org-roam
-  :ensure t
   :custom
   (org-roam-directory "~/roam/notes")
   (org-roam-dailies-directory "~/roam/dailies")
@@ -66,7 +65,6 @@
   (org-roam-db-autosync-mode))
 
 (use-package consult-notes
-  :ensure t
   :bind (("C-c n f" . consult-notes))
   :custom
   (consult-notes-denote-display-id nil)

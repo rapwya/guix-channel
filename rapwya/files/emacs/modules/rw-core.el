@@ -65,7 +65,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package tabspaces
-  :ensure t
   :config
   (tabspaces-mode 1)
   (setq tabspaces-use-filtered-buffers-as-default t
