@@ -11,7 +11,7 @@
   #:use-module (guix gexp)
   #:use-module (guix transformations)
 
-  #:export (home-emacs-service-type))
+  #:export (home-emacs-config-service-type))
 
 (define (get-emacs-packages config)
   (map specification->package
