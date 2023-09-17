@@ -10,7 +10,8 @@
   #:use-module (gnu services)
   #:use-module (guix gexp)
   #:use-module (gnu home services shells)
-  #:use-module (rapwya services emacs))
+  #:use-module (rapwya services emacs)
+  #:use-module (rapwya services desktop))
 
 (define warthael-home
   (home-environment
@@ -21,17 +22,19 @@
                 (list "git" 
                       "openssh" 
                       "ungoogled-chromium" 
-                      "font-jetbrains-mono" 
-                      "font-awesome" 
+                      ;; tools
                       "ripgrep" 
                       "exa" 
+                      "alacritty"
+                      ;; editors
                       "neovim" 
-                      "emacs-next" 
-                      "alacritty")))
+                      "emacs-next")))
 
     ;; Below is the list of Home services.  To search for available
     ;; services, run 'guix home search KEYWORD' in a terminal.
     (services 
-      (list (service home-emacs-config-service-type)))))
+      (list 
+        (service home-emacs-config-service-type)
+        (service home-desktop-service-type)))))
 
 warthael-home

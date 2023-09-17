@@ -58,16 +58,18 @@
                   %base-user-accounts))
 
     ;; Packages installed system-wide.  
-    ;; Users can also install packages under their own account: use 'guix search KEYWORD' to search
-    ;; for packages and 'guix install PACKAGE' to install a package.
     (packages (append (map specification->package
                            '("git"
                              "stow"
-                             "nss-certs"))
+
+                             ;; SSL Root Certs - don't delete
+                             "nss-certs" 
+
+                             "brightnessctl"
+                             "bluez"
+                             "bluez-alsa"))
                       %base-packages))
 
-    ;; Below is the list of system services.
-    ;; To search for available services, run 'guix system search KEYWORD' in a terminal.
     (services
       (append (list (service xfce-desktop-service-type)
                     (service cups-service-type)

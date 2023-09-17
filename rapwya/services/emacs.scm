@@ -8,7 +8,7 @@
   #:use-module (guix gexp)
   #:use-module (guix transformations)
 
-  #:export (home-emacs-config-service-type))
+  #:export (home-emacs-service-type))
 
 (define (get-emacs-packages config)
   (map specification->package
@@ -35,7 +35,7 @@
          ;; org mode
          "emacs-org"
          "emacs-org-roam"
-         "emacs-org-modern"
+        "emacs-org-modern"
 
          ;; Utility packages for things like completions
          "emacs-corfu"
@@ -49,7 +49,7 @@
 
          ;; Move between the screen and windows easily
          "emacs-avy"
-         "emacs-ace-window"
+  "emacs-ace-window"
 
          ;; buffer isolated workspaces
          "emacs-tabspaces"
