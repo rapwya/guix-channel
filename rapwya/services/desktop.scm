@@ -1,8 +1,11 @@
 (define-module (rapwya services desktop)
+  #:use-module (rapwya utils)
+
   #:use-module (gnu packages)
   #:use-module (gnu home services)
   #:use-module (gnu services)
   #:use-module (gnu services configuration)
+
   #:use-module (guix gexp)
   #:use-module (guix transformations)
 
@@ -53,8 +56,9 @@
     ("_JAVA_AWT_WM_NONREPARENTING" . "1")))
 
 (define (get-desktop-config-files config)
-  `(("sway/config" ,(local-file "../files/sway/config"))
-    ("waybar/config" ,(local-file "../files/waybar/config"))))
+  (append 
+    (make-file-pairs "sway")
+    (make-file-pairs "waybar")))
 
 (define home-desktop-service-type
   (service-type 

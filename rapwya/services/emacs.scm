@@ -77,7 +77,7 @@
          "emacs-guix")))
 
 (define (get-emacs-config-files config) 
-  (get-file-paris "emacs"))
+  (make-file-pairs "emacs"))
 
 (define home-emacs-config-service-type
   (service-type 

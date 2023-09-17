@@ -2,10 +2,10 @@
   #:use-module (guix build utils)
   #:use-module (guix gexp)
 
-  #:export (get-file-pairs))
+  #:export (make-file-pairs))
 
 
-(define (get-file-pairs dir)
+(define (make-file-pairs dir)
   "Used to get the pairs of file-like objects 
 to be consumed by home-xdg-service-config-type.
 This will slurp up any file and folders under \"dir\".
