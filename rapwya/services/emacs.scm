@@ -1,10 +1,13 @@
 (define-module (rapwya services emacs)
+  #:use-module (rapwya utils)
+
   #:use-module (gnu packages)
   #:use-module (gnu packages emacs)
   #:use-module (gnu packages emacs-xyz)
   #:use-module (gnu home services)
   #:use-module (gnu services)
   #:use-module (gnu services configuration)
+
   #:use-module (guix gexp)
   #:use-module (guix transformations)
 
@@ -49,7 +52,7 @@
 
          ;; Move between the screen and windows easily
          "emacs-avy"
-  "emacs-ace-window"
+         "emacs-ace-window"
 
          ;; buffer isolated workspaces
          "emacs-tabspaces"
@@ -73,15 +76,8 @@
          "emacs-use-package"
          "emacs-guix")))
 
-(define (get-emacs-config-files config)
-  `(("emacs/early-init.el" ,(local-file "../files/emacs/early-init.el"))
-    ("emacs/init.el" ,(local-file "../files/emacs/init.el")) 
-    ("emacs/modules/rw-core.el" ,(local-file "../files/emacs/modules/rw-core.el"))
-    ("emacs/modules/rw-completion.el" ,(local-file "../files/emacs/modules/rw-completion.el"))
-    ("emacs/modules/rw-theming.el" ,(local-file "../files/emacs/modules/rw-theming.el"))
-    ("emacs/modules/rw-dev.el" ,(local-file "../files/emacs/modules/rw-dev.el")) 
-    ("emacs/modules/rw-keys-evil.el" ,(local-file "../files/emacs/modules/rw-keys-evil.el"))
-    ("emacs/modules/rw-org.el" ,(local-file "../files/emacs/modules/rw-org.el"))))
+(define (get-emacs-config-files config) 
+  (get-file-paris "emacs"))
 
 (define home-emacs-config-service-type
   (service-type 
