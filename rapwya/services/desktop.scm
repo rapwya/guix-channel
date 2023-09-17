@@ -35,7 +35,7 @@
 
          ;; Theming
          "matcha-theme"
-         "papirus-icon-themes"
+         "papirus-icon-theme"
 
          ;; Document reader, vim keybindings with pdf support
          "zathura"
