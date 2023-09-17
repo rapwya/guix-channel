@@ -65,6 +65,6 @@
               home-profile-service-type 
               get-desktop-packages)
             (service-extension
-              home-environment-variable-service-type
+              home-environment-variables-service-type
               get-desktop-config-files)))
     (default-value #f)))
