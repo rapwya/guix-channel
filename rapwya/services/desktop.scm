@@ -70,5 +70,8 @@
               get-desktop-packages)
             (service-extension
               home-environment-variables-service-type
+              get-desktop-environment-variables )
+            (service-extension
+              home-xdg-configuration-files-service-type 
               get-desktop-config-files)))
     (default-value #f)))
