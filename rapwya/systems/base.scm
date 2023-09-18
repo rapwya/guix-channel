@@ -17,9 +17,6 @@
 
 (define %my-desktop-services
   (modify-services %desktop-services
-    ;; We need two deletes here because two of these are in (gnu services desktop)
-    ;; Maybe this is bug?
-    (delete screen-locker-service-type)
     (delete screen-locker-service-type)
 
     ;; Add Nonguix substitutes
