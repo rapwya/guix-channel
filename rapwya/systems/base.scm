@@ -34,7 +34,9 @@
     (network-manager-service-type 
       config => (network-manager-configuration
                   (inherit config)
-                  (vpn-plugins (list (network-manager-openvpn)))))))
+                  (vpn-plugins
+                    (list 
+                      (specification->package "network-manager-openvpn")))))))
 
 (define-public base-operating-system 
   (operating-system
