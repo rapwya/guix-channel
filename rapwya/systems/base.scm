@@ -72,33 +72,63 @@
 
     (services
       (append (list (service xfce-desktop-service-type)
-                    (service cups-service-type)
                     (set-xorg-configuration
-                      (xorg-configuration (keyboard-layout keyboard-layout)))
+                      (xorg-configuration (keyboard-layout keyboard-layout))) 
 
-                   ;; Configure swaylock as a setuid program 
-                   (service screen-locker-service-type 
-                            (screen-locker-configuration 
-                              (name "swaylock") 
-                              (program (file-append swaylock "/bin/swaylock")) 
-                              (using-pam? #t) 
-                              (using-setuid? #f)))
+                    ;; Enable Printing and Scanning
+                    (service cups-service-type 
+                             (cups-configuration 
+                               (web-interface? #t) 
+                               (extensions 
+                                 (list cups-filters))))
+                    (service sane-service-type) 
 
-                   ;; Configure the Guix service and ensure we use Nonguix substitutes
-                   (simple-service 'add-nonguix-substitutes 
-                                   guix-service-type 
-                                   (guix-extension 
-                                     (substitute-urls 
-                                       (append (list "https://substitutes.nonguix.org") 
-                                               %default-substitute-urls)) 
-                                     (authorized-keys 
-                                       (append (list (plain-file "nonguix.pub"
-                                                                 "(public-key (ecc (curve Ed25519) (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
-                                         %default-authorized-guix-keys))))) 
+                    (service greetd-service-type 
+                             (greetd-configuration 
+                               (greeter-supplementary-groups (list "video" "input")) 
+                               (terminals 
+                                 (list 
+                                   ;; TTY1 is the graphical login screen for Sway 
+                                   (greetd-terminal-configuration 
+                                     (terminal-vt "1") 
+                                     (terminal-switch #t)) 
+                                   ;; Set up remaining TTYs for terminal use 
+                                   (greetd-terminal-configuration (terminal-vt "2"))
+                                   (greetd-terminal-configuration (terminal-vt "3"))))))
+
+                    ;; Configure swaylock as a setuid program 
+                    (service screen-locker-service-type 
+                             (screen-locker-configuration 
+                               (name "swaylock") 
+                               (program (file-append swaylock "/bin/swaylock")) 
+                               (using-pam? #t) 
+                               (using-setuid? #f))) 
+
+
+                    ;; Add udev rules for a few packages
+                    (udev-rules-service 'pipewire-add-udev-rules pipewire)
+                    (udev-rules-service 'brightnessctl-udev-rules brightnessctl)
+
+                    ;; Power and thermal management services
+                    (service thermald-service-type)
+                    (service tlp-service-type)
+
+                    ;; Configure the Guix service and ensure we use Nonguix substitutes 
+                    (simple-service 'add-nonguix-substitutes 
+                                    guix-service-type 
+                                    (guix-extension 
+                                      (substitute-urls 
+                                        (append (list "https://substitutes.nonguix.org") 
+                                                %default-substitute-urls)) 
+                                      (authorized-keys 
+                                        (append (list (local-file "../files/keys/nonguix-signing-key.pub"))
+                                                %default-authorized-guix-keys))))) 
               %desktop-services))
 
-    ;; todo: reboot this to be on efi one day, not sure what went wrong the first time...
     (bootloader (bootloader-configuration 
-                  (bootloader grub-bootloader)
-                  (targets (list "/dev/sda"))
-                  (keyboard-layout keyboard-layout)))))
+                  (bootloader grub-efi-bootloader)
+                  (targets (list "/boot/efi"))
+                  (keyboard-layout keyboard-layout)))
+
+    ;; Allow resolution of '.local' host names with mDNS
+    (name-service-switch %mdns-host-lookup-nss))))

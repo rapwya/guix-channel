@@ -8,8 +8,10 @@
   #:use-module (gnu home)
   #:use-module (gnu packages)
   #:use-module (gnu services)
-  #:use-module (guix gexp)
   #:use-module (gnu home services shells)
+
+  #:use-module (guix gexp)
+
   #:use-module (rapwya services emacs)
   #:use-module (rapwya services desktop))
 
@@ -17,7 +19,6 @@
   (home-environment
     ;; Below is the list of packages that will show up in your
     ;; Home profile, under ~/.guix-home/profile.
-
     (packages (specifications->packages 
                 (list "git" 
                       "openssh" 
