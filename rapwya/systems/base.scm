@@ -6,6 +6,7 @@
   #:use-module (gnu packages shells)
   #:use-module (gnu packages networking)
   #:use-module (gnu packages wm)
+  #:use-module (gnu services)
   #:use-module (gnu services desktop)
   #:use-module (gnu services cups)
   #:use-module (gnu services networking)
@@ -13,6 +14,30 @@
   #:use-module (gnu services xorg)
   #:use-module (nongnu packages linux)
   #:use-module (nongnu system linux-initrd))
+
+(define %my-desktop-services
+  (modify-services %desktop-services
+    ;; We need two deletes here because two of these are in (gnu services desktop)
+    ;; Maybe this is bug?
+    (delete screen-locker-service)
+    (delete screen-locker-service)
+
+    ;; Add Nonguix substitutes
+    (guix-service-type 
+      config => (guix-configuraiton
+                  (inherit config)
+                  (substitute-urls 
+                    (append (list "https://substitutes.nonguix.org") 
+                            %default-substitute-urls))
+                  (authorized-keys 
+                    (append (list (local-file "../files/keys/nonguix-signing-key.pub")) 
+                            %default-authorized-guix-keys))))
+
+    ;; Allow OpenVPN to manage VPNs
+    (network-manager-service-type 
+      config => (network-manager-configuration
+                  (inherit config)
+                  (vpn-plugins (list (network-manager-openvpn)))))))
 
 (define-public base-operating-system 
   (operating-system
@@ -35,7 +60,12 @@
     (locale "en_US.utf8") 
     (timezone "America/Los_Angeles")
     (keyboard-layout (keyboard-layout "us")) 
-    (host-name "base-system")
+    (host-name "base-system") 
+
+    (bootloader (bootloader-configuration 
+                  (bootloader grub-efi-bootloader) 
+                  (targets (list "/boot/efi")) 
+                  (keyboard-layout keyboard-layout)))
 
    ;; without this Guix will freak out
    ;; this is meant to be overwritten.
@@ -113,22 +143,7 @@
                     (service thermald-service-type)
                     (service tlp-service-type)
 
-                    ;; Configure the Guix service and ensure we use Nonguix substitutes 
-                    (simple-service 'add-nonguix-substitutes 
-                                    guix-service-type 
-                                    (guix-extension 
-                                      (substitute-urls 
-                                        (append (list "https://substitutes.nonguix.org") 
-                                                %default-substitute-urls)) 
-                                      (authorized-keys 
-                                        (append (list (local-file "../files/keys/nonguix-signing-key.pub"))
-                                                %default-authorized-guix-keys))))) 
-              %desktop-services))
-
-    (bootloader (bootloader-configuration 
-                  (bootloader grub-efi-bootloader)
-                  (targets (list "/boot/efi"))
-                  (keyboard-layout keyboard-layout)))
+              %my-desktop-services)))
 
     ;; Allow resolution of '.local' host names with mDNS
-    (name-service-switch %mdns-host-lookup-nss))))
+    (name-service-switch %mdns-host-lookup-nss)))

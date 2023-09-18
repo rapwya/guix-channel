@@ -37,6 +37,14 @@
          "matcha-theme"
          "papirus-icon-theme"
 
+         ;; XDG Utils
+         "xdg-desktop-portal"
+         "xdg-desktop-portal-gtk"
+         "xdg-desktop-portal-wlr"
+         "xdg-utils"
+         "xdg-dbus-proxy"
+         "shared-mime-info"
+
          ;; Document reader, vim keybindings with pdf support
          "zathura"
          "zathura-pdf-mupdf")))
