@@ -24,9 +24,12 @@
 
 (define %my-desktop-services
   (modify-services %desktop-services
-    ;;(delete slim-service-type)
-    (delete screen-locker-service-type)
+    ;; Greetd will provides "greetd" and can be used in place of mingetty
+    (delete login-service-type)
     (delete mingetty-service-type)
+
+    ;; we'll define swaylock lower
+    (delete screen-locker-service-type)
 
     ;; Add Nonguix substitutes
     (guix-service-type 
@@ -74,7 +77,13 @@
                     (greetd-terminal-configuration 
                       (terminal-vt "2"))
                     (greetd-terminal-configuration 
-                      (terminal-vt "3"))))))
+                      (terminal-vt "3"))
+                    (greetd-terminal-configuration 
+                      (terminal-vt "4"))
+                    (greetd-terminal-configuration 
+                      (terminal-vt "5"))
+                    (greetd-terminal-configuration 
+                      (terminal-vt "6"))))))
 
     ;; Configure swaylock as a setuid program
     (service screen-locker-service-type 
