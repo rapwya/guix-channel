@@ -125,9 +125,13 @@
     (keyboard-layout (keyboard-layout "us")) 
     (host-name "base-system") 
 
+    ;; todo: somehow this didn't get installed to efi
+    ;; I should fix that one day...
+    ;; Not quite sure how? Maybe manually recreate it?
+    ;; Or maybe try and make this system on a usb and boot that to efi...
     (bootloader (bootloader-configuration 
-                  (bootloader grub-efi-bootloader) 
-                  (targets (list "/boot/efi")) 
+                  (bootloader grub-bootloader) 
+                  (targets (list "/dev/sda")) 
                   (keyboard-layout keyboard-layout)))
 
    ;; without this Guix will freak out
