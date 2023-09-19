@@ -26,6 +26,7 @@
   (modify-services %desktop-services
     ;;(delete slim-service-type)
     (delete screen-locker-service-type)
+    (delete mingetty-service-type)
 
     ;; Add Nonguix substitutes
     (guix-service-type 
