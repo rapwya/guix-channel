@@ -24,7 +24,7 @@
 
 (define %my-desktop-services
   (modify-services %desktop-services
-    (delete slim-service-type)
+    ;;(delete slim-service-type)
     (delete screen-locker-service-type)
 
     ;; Add Nonguix substitutes
