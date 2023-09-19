@@ -15,6 +15,7 @@
   #:use-module (gnu services cups)
   #:use-module (gnu services desktop)
   #:use-module (gnu services networking)
+  #:use-module (gnu services pm)
   #:use-module (gnu services ssh)
   #:use-module (gnu services xorg)
 
