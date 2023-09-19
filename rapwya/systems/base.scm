@@ -24,6 +24,9 @@
 
 (define %my-desktop-services
   (modify-services %desktop-services
+    (delete slim-service-type)
+    (delete screen-locker-service-type)
+
     ;; Add Nonguix substitutes
     (guix-service-type 
       config => (guix-configuration
@@ -105,9 +108,10 @@
                       %base-packages))
 
     (services
-      (append (list (service xfce-desktop-service-type)
-                    (set-xorg-configuration
-                      (xorg-configuration (keyboard-layout keyboard-layout))) 
+      (append (list 
+                    ;;(service xfce-desktop-service-type)
+                    ;;(set-xorg-configuration
+                      ;;(xorg-configuration (keyboard-layout keyboard-layout))) 
 
                     ;; Enable Printing and Scanning
                     (service cups-service-type 
