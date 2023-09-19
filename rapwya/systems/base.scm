@@ -24,7 +24,7 @@
 
 (define %my-desktop-services
   (modify-services %desktop-services
-    ;;(delete slim-service-type)
+    (delete slim-service-type)
     (delete screen-locker-service-type)
 
     ;; Add Nonguix substitutes
@@ -45,6 +45,52 @@
                   (vpn-plugins
                     (list 
                       (specification->package "network-manager-openvpn")))))))
+
+(define %my-services
+  (list 
+    ;;(service xfce-desktop-service-type) 
+    ;;(set-xorg-configuration 
+    ;;(xorg-configuration (keyboard-layout keyboard-layout))) 
+
+    ;; Enable Printing and Scanning 
+    (service cups-service-type
+             (cups-configuration
+               (web-interface? #t)
+               (extensions
+                 (list cups-filters))))
+     (service sane-service-type) 
+
+     (service greetd-service-type 
+              (greetd-configuration 
+                (greeter-supplementary-groups (list "video" "input")) 
+                (terminals 
+                  (list
+                    ;; TTY1 is the graphical login screen for Sway
+                    (greetd-terminal-configuration
+                      (terminal-vt "1")
+                      (terminal-switch #t))
+                    ;; Set up remaining TTYs for terminal use
+                    (greetd-terminal-configuration 
+                      (terminal-vt "2"))
+                    (greetd-terminal-configuration 
+                      (terminal-vt "3"))))))
+
+    ;; Configure swaylock as a setuid program
+    (service screen-locker-service-type 
+             (screen-locker-configuration 
+               (name "swaylock") 
+               (program (file-append swaylock "/bin/swaylock")) 
+               (using-pam? #t) 
+               (using-setuid? #f))) 
+
+
+    ;; Add udev rules for a few packages 
+    (udev-rules-service 'pipewire-add-udev-rules pipewire) 
+    (udev-rules-service 'brightnessctl-udev-rules brightnessctl)
+
+    ;; Power and thermal management services 
+    (service thermald-service-type) 
+    (service tlp-service-type)))
 
 (define-public base-operating-system 
   (operating-system
@@ -107,51 +153,7 @@
                              "bluez-alsa"))
                       %base-packages))
 
-    (services
-      (append (list 
-                    ;;(service xfce-desktop-service-type)
-                    ;;(set-xorg-configuration
-                      ;;(xorg-configuration (keyboard-layout keyboard-layout))) 
-
-                    ;; Enable Printing and Scanning
-                    (service cups-service-type 
-                             (cups-configuration 
-                               (web-interface? #t) 
-                               (extensions 
-                                 (list cups-filters))))
-                    (service sane-service-type) 
-
-                    (service greetd-service-type 
-                             (greetd-configuration 
-                               (greeter-supplementary-groups (list "video" "input")) 
-                               (terminals 
-                                 (list 
-                                   ;; TTY1 is the graphical login screen for Sway 
-                                   (greetd-terminal-configuration 
-                                     (terminal-vt "1") 
-                                     (terminal-switch #t)) 
-                                   ;; Set up remaining TTYs for terminal use 
-                                   (greetd-terminal-configuration (terminal-vt "2"))
-                                   (greetd-terminal-configuration (terminal-vt "3"))))))
-
-                    ;; Configure swaylock as a setuid program 
-                    (service screen-locker-service-type 
-                             (screen-locker-configuration 
-                               (name "swaylock") 
-                               (program (file-append swaylock "/bin/swaylock")) 
-                               (using-pam? #t) 
-                               (using-setuid? #f))) 
-
-
-                    ;; Add udev rules for a few packages
-                    (udev-rules-service 'pipewire-add-udev-rules pipewire)
-                    (udev-rules-service 'brightnessctl-udev-rules brightnessctl)
-
-                    ;; Power and thermal management services
-                    (service thermald-service-type)
-                    (service tlp-service-type)
-
-              %my-desktop-services)))
+    (services (append %my-services %my-desktop-services))
 
     ;; Allow resolution of '.local' host names with mDNS
     (name-service-switch %mdns-host-lookup-nss)))
