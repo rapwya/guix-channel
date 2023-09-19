@@ -21,7 +21,7 @@
 
     ;; Add Nonguix substitutes
     (guix-service-type 
-      config => (guix-configuraiton
+      config => (guix-configuration
                   (inherit config)
                   (substitute-urls 
                     (append (list "https://substitutes.nonguix.org") 
