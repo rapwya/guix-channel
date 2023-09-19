@@ -5,6 +5,7 @@
   #:use-module (gnu system nss)
   #:use-module (gnu packages shells)
   #:use-module (gnu packages networking)
+  #:use-module (gnu packages cups)
   #:use-module (gnu packages wm)
   #:use-module (gnu services)
   #:use-module (gnu services desktop)
