@@ -24,8 +24,6 @@
 
 (define %my-desktop-services
   (modify-services %desktop-services
-    (delete screen-locker-service-type)
-
     ;; Add Nonguix substitutes
     (guix-service-type 
       config => (guix-configuration
