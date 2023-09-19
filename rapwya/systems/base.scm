@@ -1,18 +1,23 @@
 (define-module (rapwya systems base) 
   #:use-module (srfi srfi-1)
+
   #:use-module (gnu)
   #:use-module (gnu system)
   #:use-module (gnu system nss)
-  #:use-module (gnu packages shells)
-  #:use-module (gnu packages networking)
+
   #:use-module (gnu packages cups)
+  #:use-module (gnu packages linux)
+  #:use-module (gnu packages networking)
+  #:use-module (gnu packages shells)
   #:use-module (gnu packages wm)
+
   #:use-module (gnu services)
-  #:use-module (gnu services desktop)
   #:use-module (gnu services cups)
+  #:use-module (gnu services desktop)
   #:use-module (gnu services networking)
   #:use-module (gnu services ssh)
   #:use-module (gnu services xorg)
+
   #:use-module (nongnu packages linux)
   #:use-module (nongnu system linux-initrd))
 
