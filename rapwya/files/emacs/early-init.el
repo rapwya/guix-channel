@@ -1,3 +1,8 @@
+;;; early-init.el --- Loads settings that don't have to do with the GUI.
+;;; Commentary:
+
+;;; Code:
+
 ;; Packages will be initialized by guix later.
 (setq package-enable-at-startup nil)
 (setq package-archives nil)
@@ -16,7 +21,8 @@
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
 (push '(horizontal-scroll-bars) default-frame-alist)
-(setq menu-bar-mode nil 
-      tool-bar-mode nil 
+(setq menu-bar-mode nil
+      tool-bar-mode nil
       scroll-bar-mode nil)
 
+;;;early-init.el ends here

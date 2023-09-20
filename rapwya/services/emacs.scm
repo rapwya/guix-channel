@@ -27,10 +27,18 @@
 
          ;; theming
          "emacs-doom-themes"
+         "emacs-doom-modeline"
          "emacs-kind-icon"
          "emacs-mood-line"
          "emacs-minions"
+         "emacs-all-the-icons"
 
+         ;; Dired
+         "emacs-dired-hacks"
+         "emacs-openwith"
+         "emacs-all-the-icons-dired"
+
+         ;; Parens / Delimiters
          "emacs-smartparens"
          "emacs-rainbow-delimiters"
          "emacs-rainbow-mode"
@@ -38,7 +46,7 @@
          ;; org mode
          "emacs-org"
          "emacs-org-roam"
-        "emacs-org-modern"
+         "emacs-org-modern"
 
          ;; Utility packages for things like completions
          "emacs-corfu"
@@ -49,6 +57,7 @@
          "emacs-embark"
          "emacs-consult"
          "emacs-consult-notes"
+         "emacs-editorconfig"
 
          ;; Move between the screen and windows easily
          "emacs-avy"

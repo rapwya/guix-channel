@@ -1,4 +1,7 @@
-;; -*- lexical-binding: t; -*-
+;;; init.el --- Loads emacs modules. -*- lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
 
 (setq
  ;; set the GC from the default 8kb to 100mb
