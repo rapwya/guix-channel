@@ -137,40 +137,40 @@ this repo will hold protocols used by Hyprland to bridge the aforementioned gap.
      (snippet '(delete-file-recursively "nix"))
      (sha256
       (base32
-       "1cmjgwd7fm78jfw7wmi5lz39qp8n3wjv0lc3fxnybv144ialblcf")))
-    (build-system meson-build-system)))
-      (arguments
-     (list #:build-type "release"
-           #:phases
-           #~(modify-phases %standard-phases
-               (add-after 'unpack 'fix-path
-                 (lambda* (#:key inputs #:allow-other-keys)
-                   (substitute* "src/render/OpenGL.cpp"
-                     (("/usr") #$output))
-                   (substitute* (find-files "src" "\\.cpp")
-                     (("(execAndGet\\(\\(?\")\\<(cat|fc-list|lspci|nm)\\>"
-                       _ pre cmd)
-                      (format #f "~a~a"
-                              pre
-                              (search-input-file
-                               inputs (string-append "/bin/" cmd)))))))
-               (add-after 'unpack 'substitute-meson-build
-                 (lambda _
-                   (substitute* "meson.build"
-                     (("\\<git\\>") "true")
-                     ((".*@.*") "")))))))
-    (native-inputs (list gcc-13 jq pkg-config))
-    (inputs
-     (list hyprland-protocols
-           pango
-           pciutils
-           udis86-for-hyprland
-           wlroots-for-hyprland))
-    (home-page "https://hyprland.org")
-    (synopsis "Dynamic tiling Wayland compositor based on wlroots")
-    (description
-     "Hyprland is a dynamic tiling Wayland compositor based on @code{wlroots}
+       "1cmjgwd7fm78jfw7wmi5lz39qp8n3wjv0lc3fxnybv144ialblcf"))))
+   (build-system meson-build-system)
+   (arguments
+    (list #:build-type "release"
+          #:phases
+          #~(modify-phases %standard-phases
+                           (add-after 'unpack 'fix-path
+                                      (lambda* (#:key inputs #:allow-other-keys)
+                                        (substitute* "src/render/OpenGL.cpp"
+                                                     (("/usr") #$output))
+                                        (substitute* (find-files "src" "\\.cpp")
+                                                     (("(execAndGet\\(\\(?\")\\<(cat|fc-list|lspci|nm)\\>"
+                                                       _ pre cmd)
+                                                      (format #f "~a~a"
+                                                              pre
+                                                              (search-input-file
+                                                               inputs (string-append "/bin/" cmd)))))))
+                           (add-after 'unpack 'substitute-meson-build
+                                      (lambda _
+                                        (substitute* "meson.build"
+                                                     (("\\<git\\>") "true")
+                                                     ((".*@.*") "")))))))
+   (native-inputs (list gcc-13 jq pkg-config))
+   (inputs
+    (list hyprland-protocols
+          pango
+          pciutils
+          udis86-for-hyprland
+          wlroots-for-hyprland))
+   (home-page "https://hyprland.org")
+   (synopsis "Dynamic tiling Wayland compositor based on wlroots")
+   (description
+    "Hyprland is a dynamic tiling Wayland compositor based on @code{wlroots}
 that doesn't sacrifice on its looks.  It supports multiple layouts, fancy
 effects, has a very flexible IPC model allowing for a lot of customization, and
 more.")
-    (license license:bsd-3)))
+   (license license:bsd-3)))
