@@ -16,6 +16,9 @@
 (define (get-emacs-packages config)
   (map specification->package
        (list 
+         ;; emacs itself
+         "emacs"
+
          ;; git support
          "emacs-magit"
 

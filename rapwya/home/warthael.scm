@@ -28,8 +28,7 @@
                       "exa" 
                       "alacritty"
                       ;; editors
-                      "neovim" 
-                      "emacs-next")))
+                      "neovim")))
 
     ;; Below is the list of Home services.  To search for available
     ;; services, run 'guix home search KEYWORD' in a terminal.
