@@ -1,11 +1,13 @@
 (define-module (rapwya packages wm)
   #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (guix build-system gnu)
   #:use-module (guix build-system meson)
   #:use-module (guix gexp)
   #:use-module (guix git-download)
   #:use-module (guix packages)
   #:use-module (guix utils)
 
+  #:use-module (gnu packages autotools)
   #:use-module (gnu packages freedesktop)
   #:use-module (gnu packages gcc)
   #:use-module (gnu packages gl)
@@ -14,8 +16,18 @@
   #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages python)
   #:use-module (gnu packages web)
+  #:use-module (gnu packages xdisorg)
+  #:use-module (gnu packages xorg)
 
   #:use-module (rapwya packages xdisorg))
+
+(define hwdata-for-hyprland
+  (package
+    (inherit hwdata)
+    (arguments
+     (substitute-keyword-arguments (package-arguments hwdata)
+       ((#:phases _) #~%standard-phases)))
+    (outputs '("out"))))
 
 (define libdisplay-info-for-hyprland
   (package
@@ -31,7 +43,7 @@
                (base32
                 "1ffq7w1ig1y44rrmkv1hvfjylzgq7f9nlnnsdgdv7pmcpfh45pgf"))))
     (build-system meson-build-system)
-    (arguments '(#:tests? #f))          ;TODO
+    (arguments '(#:tests? #f))
     (native-inputs (list hwdata-for-hyprland pkg-config python-minimal-wrapper))
     (home-page "https://emersion.pages.freedesktop.org/libdisplay-info/")
     (synopsis "EDID and DisplayID library")
@@ -110,22 +122,22 @@ command line tool called @code{udcli} that incorporates the library.")
 This repository exists in an effort to bridge the gap between Hyprland and KDE/Gnome's functionality.
 Since @code{wlr-protocols} is closed for new submissions, and @code{wayland-protocols} is very slow with changes,
 this repo will hold protocols used by Hyprland to bridge the aforementioned gap.")
-   (license license:bsd-3))
+   (license license:bsd-3)))
+
+(define meson-build-patch
+  (origin
+    (method url-fetch)
+    (uri (string-append "https://github.com/hyprwm/Hyprland" "/raw/"
+                        "0.30.0"
+                        "/nix/patches/meson-build.patch"))
+    (file-name "meson-build.patch")
+    (sha256
+     (base32 "0czc8238vjhsfnhrya6chcvy922f40nlqa4j5mq6f9h002ag9bhk"))))
 
 (define-public hyprland
-  (let* ((hyprland-version "0.30.0")
-         (meson-build-patch
-          (origin
-           (method url-fetch)
-           (uri (string-append "https://github.com/hyprwm/Hyprland" "/raw/"
-                               hyprland-version
-                               "/nix/patches/meson-build.patch"))
-           (file-name "hyprland-unbundle-wlroots.patch")
-           (sha256
-            (base32 "0czc8238vjhsfnhrya6chcvy922f40nlqa4j5mq6f9h002ag9bhk"))))))
   (package
    (name "hyprland")
-   (version hyprland-version)
+   (version "0.30.0")
    (source
     (origin
      (method git-fetch)
@@ -158,19 +170,19 @@ this repo will hold protocols used by Hyprland to bridge the aforementioned gap.
                                       (lambda _
                                         (substitute* "meson.build"
                                                      (("\\<git\\>") "true")
-                                                     ((".*@.*") "")))))))
-   (native-inputs (list gcc-13 jq pkg-config))
-   (inputs
-    (list hyprland-protocols
-          pango
-          pciutils
-          udis86-for-hyprland
-          wlroots-for-hyprland))
-   (home-page "https://hyprland.org")
-   (synopsis "Dynamic tiling Wayland compositor based on wlroots")
-   (description
-    "Hyprland is a dynamic tiling Wayland compositor based on @code{wlroots}
+                     ((".*@.*") "")))))))
+    (native-inputs (list gcc-13 jq pkg-config))
+    (inputs
+     (list hyprland-protocols
+           pango
+           pciutils
+           udis86-for-hyprland
+           wlroots-for-hyprland))
+    (home-page "https://hyprland.org")
+    (synopsis "Dynamic tiling Wayland compositor based on wlroots")
+    (description
+     "Hyprland is a dynamic tiling Wayland compositor based on @code{wlroots}
 that doesn't sacrifice on its looks.  It supports multiple layouts, fancy
 effects, has a very flexible IPC model allowing for a lot of customization, and
 more.")
-   (license license:bsd-3)))
+    (license license:bsd-3)))
