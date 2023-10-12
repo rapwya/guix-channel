@@ -19,6 +19,7 @@
   #:use-module (gnu packages xdisorg)
   #:use-module (gnu packages xorg)
 
+  #:use-module (rapwya packages freedesktop)
   #:use-module (rapwya packages xdisorg))
 
 (define hwdata-for-hyprland
