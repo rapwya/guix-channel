@@ -131,7 +131,7 @@ command line tool called @code{udcli} that incorporates the library.")
    (source
     (origin
      (method git-fetch)
-     (url
+     (uri
       (git-reference
        (url "https://github.com/hyprwm/hyprland-protocols")
        (commit
@@ -169,7 +169,7 @@ this repo will hold protocols used by Hyprland to bridge the aforementioned gap.
    (source
     (origin
      (method git-fetch)
-     (url
+     (uri
       (git-reference
        (url "https://github.com/hyprwm/Hyprland")
        (commit
