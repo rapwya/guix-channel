@@ -1,7 +1,9 @@
 (define-module (rapwya packages wm)
   #:use-module ((guix licenses) #:prefix license:)
+
   #:use-module (guix build-system gnu)
   #:use-module (guix build-system meson)
+
   #:use-module (guix download)
   #:use-module (guix gexp)
   #:use-module (guix git-download)
@@ -117,7 +119,7 @@ command line tool called @code{udcli} that incorporates the library.")
       (modify-inputs
        (package-propagated-inputs base)
        (append libdisplay-info-for-hyprland libxcb xcb-util-renderutil)
-       (replace "libinput-minimal" libinput-minimal-1.23.0)
+       (replace "libinput-minimal" libinput-minimal-1.24.0)
        (replace "pixman" pixman-0.42.2)))
      (native-inputs
       (modify-inputs
